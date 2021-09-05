@@ -15,6 +15,7 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt5 ${QT_VERSION} REQUIRED COMPONENTS
     Core
     Test
+    Network
 )
 
 add_subdirectory(src)

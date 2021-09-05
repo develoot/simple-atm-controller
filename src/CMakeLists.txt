@@ -8,6 +8,7 @@ add_executable(atmcontroller
 
 target_link_libraries(atmcontroller
     Qt::Core
+    Qt::Network
 )
 
 add_subdirectory(tests)

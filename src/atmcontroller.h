@@ -2,9 +2,9 @@
 #include <QVector>
 
 #include "cardreader.h"
+#include "bankcommunicator.h"
 
 // TODO: Implement these classes.
-class BankCommunicator {};
 class BankAccount {};
 
 class AtmController : public QObject {
