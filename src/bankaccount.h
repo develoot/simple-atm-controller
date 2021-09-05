@@ -1,3 +1,6 @@
+#ifndef _BANKACCOUNT_H
+#define _BANKACCOUNT_H
+
 #include <string>
 
 /**
@@ -6,3 +9,5 @@
 struct BankAccount {
     std::string name;
 };
+
+#endif

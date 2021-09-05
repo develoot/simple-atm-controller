@@ -1,3 +1,6 @@
+#ifndef _CARDREADER_H
+#define _CARDREADER_H
+
 #include <QObject>
 #include <QSocketNotifier>
 
@@ -29,3 +32,5 @@ private:
     QSocketNotifier* m_notify;
     QString m_device;
 };
+
+#endif

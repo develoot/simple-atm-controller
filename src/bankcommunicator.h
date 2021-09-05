@@ -1,3 +1,6 @@
+#ifndef _BANKCOMMUNICATOR_H
+#define _BANKCOMMUNICATOR_H
+
 #include <QObject>
 #include <QNetworkAccessManager>
 
@@ -35,3 +38,5 @@ private:
     QNetworkAccessManager m_networkManager;
     QUrl m_baseUrl;
 };
+
+#endif

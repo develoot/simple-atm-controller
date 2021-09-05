@@ -1,3 +1,6 @@
+#ifndef _ATMCONTROLLER_H
+#define _ATMCONTROLLER_H
+
 #include <QObject>
 #include <QVector>
 
@@ -61,3 +64,5 @@ private:
     QVector<BankAccount> m_accountList;
     BankAccount m_selectedAccount;
 };
+
+#endif
