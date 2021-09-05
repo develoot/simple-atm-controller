@@ -4,15 +4,17 @@
 #include <QObject>
 #include <QNetworkAccessManager>
 
+#include "cardreader.h"
+
 class BankCommunicator : public QObject {
     Q_OBJECT
 
 public:
-    BankCommunicator(const QUrl& baseUrl = QUrl{"https://api.mybank.com"});
+    BankCommunicator(QObject *parent = nullptr, const QUrl& baseUrl = QUrl{"https://api.mybank.com"});
     ~BankCommunicator();
 
 public slots:
-    void authenticate(qint32 pinNumber);
+    void authenticate(CardReader::CardInfo info, qint32 pinNumber);
     void fetchAccountList();
     void fetchAccountBalance();
     void fetchAccountDeposit();

@@ -1,6 +1,6 @@
 #include "bankcommunicator.h"
 
-BankCommunicator::BankCommunicator(const QUrl& baseUrl)
+BankCommunicator::BankCommunicator(QObject *parent, const QUrl& baseUrl)
 {
 }
 
@@ -8,7 +8,7 @@ BankCommunicator::~BankCommunicator()
 {
 }
 
-void BankCommunicator::authenticate(qint32 pinNumber)
+void BankCommunicator::authenticate(CardReader::CardInfo info, qint32 pinNumber)
 {
 }
 
