@@ -12,6 +12,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+include(FeatureSummary)
+
 set(QT_VERSION 5.12)
 
 find_package(Qt5 ${QT_VERSION} REQUIRED COMPONENTS
@@ -21,3 +23,5 @@ find_package(Qt5 ${QT_VERSION} REQUIRED COMPONENTS
 )
 
 add_subdirectory(src)
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
