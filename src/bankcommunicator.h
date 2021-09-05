@@ -2,7 +2,7 @@
 #define _BANKCOMMUNICATOR_H
 
 #include <QObject>
-#include <QNetworkAccessManager>
+#include <QtNetwork/QNetworkAccessManager>
 
 #include "cardreader.h"
 
