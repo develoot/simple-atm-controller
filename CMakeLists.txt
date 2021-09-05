@@ -12,6 +12,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+set(QT_VERSION 5.12)
+
 find_package(Qt5 ${QT_VERSION} REQUIRED COMPONENTS
     Core
     Test
