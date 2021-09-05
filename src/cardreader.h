@@ -33,6 +33,7 @@ signals:
 private:
     QSocketNotifier* m_notify;
     QString m_device;
+    int m_fd;
 };
 
 #endif
