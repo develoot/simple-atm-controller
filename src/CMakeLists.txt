@@ -1,5 +1,7 @@
 set(atmcontroller_SRCS
+    main.cc
     atmcontroller.cc
+    bankcommunicator.cc
     cardreader.cc
 )
 

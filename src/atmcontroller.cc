@@ -1,9 +1,29 @@
-#include <iostream>
+#include "atmcontroller.h"
 
-#include <QTextStream>
-
-int main(void)
+void AtmController::readCard()
 {
-    QTextStream(stdout) << "Hello, world!" << Qt::endl;
-    return 0;
+}
+
+void AtmController::authenticate(qint32 pinNumber)
+{
+}
+
+void AtmController::fetchAccountList()
+{
+}
+
+void AtmController::selectAccount(qint32 index)
+{
+}
+
+void AtmController::fetchAccountBalance()
+{
+}
+
+void AtmController::fetchAccountDeposit()
+{
+}
+
+void AtmController::withdrawOperation()
+{
 }
