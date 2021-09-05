@@ -24,6 +24,6 @@ int CardReader::initialize()
 
 void CardReader::read()
 {
-    BankAccount account = { .name = "John Doe" };
-    emit readingCardSucceed(account);
+    CardInfo info = { .name = "John Doe" };
+    emit readingCardSucceed(info);
 }

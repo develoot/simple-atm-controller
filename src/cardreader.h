@@ -4,14 +4,16 @@
 #include <QObject>
 #include <QSocketNotifier>
 
-#include "bankaccount.h"
-
 class CardReader : public QObject {
     Q_OBJECT
 
 public:
     CardReader(const QString& device = QString{"/dev/input/event77"}, QObject* parent = nullptr);
     ~CardReader();
+
+    struct CardInfo {
+        QString name;
+    };
 
     int initialize();
 
@@ -25,7 +27,7 @@ public slots:
 
 signals:
     void readingCardStarted();
-    void readingCardSucceed(BankAccount account);
+    void readingCardSucceed(CardInfo info);
     void readingCardFailed();
 
 private:
