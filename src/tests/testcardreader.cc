@@ -9,7 +9,10 @@ void TestCardReader::testReadSucceed()
     QVERIFY(true);
 
     /*
-    CardReader cardReader{"/path/to/valid/dev"};
+    CardReader cardReader{"/path/to/valid/dev", this};
+    int result = cardReader.initialize();
+    QCOMPARE(result, 0);
+
     QSignalSpy readingCardStartedSpy(&cardReader, &CardReader::readingCardStarted);
     QSignalSpy readingCardSucceedSpy(&cardReader, &CardReader::readingCardSucceed);
 
@@ -25,7 +28,10 @@ void TestCardReader::testReadFailed()
     QVERIFY(true);
 
     /*
-    CardReader cardReader{"/path/to/invalid/dev"};
+    CardReader cardReader{"/path/to/invalid/dev", this};
+    int result = cardReader.initialize();
+    QCOMPARE(result, 0);
+
     QSignalSpy readingCardStartedSpy(&cardReader, &CardReader::readingCardStarted);
     QSignalSpy readingCardFailedSpy(&cardReader, &CardReader::readingCardFailed);
 

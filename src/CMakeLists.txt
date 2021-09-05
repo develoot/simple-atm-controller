@@ -1,5 +1,6 @@
 set(atmcontroller_SRCS
     atmcontroller.cc
+    cardreader.cc
 )
 
 set(atmcontroller_HDRS
