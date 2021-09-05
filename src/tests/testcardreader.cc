@@ -9,7 +9,7 @@ void TestCardReader::testReadSucceed()
     QVERIFY(true);
 
     /*
-    CardReader cardReader{"/path/to/valid/dev", this};
+    CardReader cardReader{this, "/path/to/valid/dev"};
     int result = cardReader.initialize();
     QCOMPARE(result, 0);
 
@@ -28,7 +28,7 @@ void TestCardReader::testReadFailed()
     QVERIFY(true);
 
     /*
-    CardReader cardReader{"/path/to/invalid/dev", this};
+    CardReader cardReader{this, "/path/to/invalid/dev"};
     int result = cardReader.initialize();
     QCOMPARE(result, 0);
 

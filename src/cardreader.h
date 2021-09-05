@@ -8,7 +8,7 @@ class CardReader : public QObject {
     Q_OBJECT
 
 public:
-    CardReader(const QString& device = QString{"/dev/input/event77"}, QObject* parent = nullptr);
+    CardReader(QObject* parent = nullptr, const QString& device = QString{"/dev/input/event77"});
     ~CardReader();
 
     struct CardInfo {

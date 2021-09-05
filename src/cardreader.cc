@@ -3,7 +3,7 @@
 
 #include "cardreader.h"
 
-CardReader::CardReader(const QString& device, QObject *parent)
+CardReader::CardReader(QObject* parent, const QString& device)
     : QObject{parent}
     , m_device{device}
 {
