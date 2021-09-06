@@ -8,6 +8,7 @@ set(atmcontroller_SRCS
 set(atmcontroller_HDRS
     BankApiAccessManager.h
     BankApiAccessManagerInterface.h
+    CardReaderInterface.h
     atmcontroller.h
     bankaccount.h
     cardreader.h
