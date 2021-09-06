@@ -4,7 +4,7 @@
 #include "CardReader.h"
 
 CardReader::CardReader(QObject* parent, QString device)
-    : QObject{parent}
+    : CardReaderBase{parent}
     , m_device{device}
 {
 }

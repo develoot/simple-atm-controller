@@ -1,5 +1,5 @@
-#ifndef _ATMCONTROLLER_H
-#define _ATMCONTROLLER_H
+#ifndef _ATM_CONTROLLER_H
+#define _ATM_CONTROLLER_H
 
 #include <memory>
 
@@ -17,7 +17,9 @@ class AtmController : public QObject {
                 NOTIFY selectedAccountIndexChanged);
 
 public:
-    AtmController(QObject* const parent = nullptr);
+    AtmController(QObject* const parent = nullptr,
+                    CardReaderBase* cardReader = nullptr,
+                    BankApiAccessManagerBase* bankApiAccessManager = nullptr);
     ~AtmController() = default;
 
     int initialize();
@@ -61,15 +63,15 @@ signals:
     void selectedAccountIndexChanged(qint32 index);
 
 private:
-    BankApiAccessManager m_bankCommDelegate;
-    CardReader m_cardReaderDelegate;
+    std::unique_ptr<BankApiAccessManagerBase> m_bankApiAccessManagerDelegate = nullptr;
+    std::unique_ptr<CardReaderBase> m_cardReaderDelegate = nullptr;
 
-    bool m_isAuthenticated;
-    qint32 m_pinNumber;
-    qint64 m_selectedAccountIndex;
+    bool m_isAuthenticated = false;
+    qint32 m_pinNumber = -1;
+    qint64 m_selectedAccountIndex = -1;
 
-    QList<BankAccount> m_accountList;
-    std::unique_ptr<CardReader::CardInfo> m_cardInfo;
+    QList<BankAccount> m_accountList{};
+    std::unique_ptr<CardReader::CardInfo> m_cardInfo{nullptr};
 };
 
 #endif

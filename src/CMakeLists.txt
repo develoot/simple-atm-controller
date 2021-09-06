@@ -1,17 +1,17 @@
 set(atmcontroller_SRCS
+    AtmController.cc
     BankApiAccessManager.cc
     CardReader.cc
-    atmcontroller.cc
     main.cc
 )
 
 set(atmcontroller_HDRS
+    AtmController.h
     BankAccount.h
     BankApiAccessManager.h
-    BankApiAccessManagerInterface.h
+    BankApiAccessManagerBase.h
     CardReader.h
-    CardReaderInterface.h
-    atmcontroller.h
+    CardReaderBase.h
 )
 
 add_executable(atmcontroller

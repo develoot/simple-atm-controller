@@ -1,7 +1,7 @@
 #include "BankApiAccessManager.h"
 
 BankApiAccessManager::BankApiAccessManager(QObject* const parent, const QString& baseUrl)
-    : QObject{parent}
+    : BankApiAccessManagerBase{parent}
     , m_baseUrl{baseUrl}
     , m_networkManager{this}
 {

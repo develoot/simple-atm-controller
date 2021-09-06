@@ -3,9 +3,9 @@
 
 #include <QtCore>
 
-#include "CardReaderInterface.h"
+#include "CardReaderBase.h"
 
-class CardReader : public QObject, public CardReaderInterface {
+class CardReader : public CardReaderBase {
     Q_OBJECT
 
 public:
@@ -16,11 +16,6 @@ public:
 
 public slots:
     void read() override;
-
-signals:
-    void readingCardStarted() override;
-    void readingCardSucceed(CardReader::CardInfo info) override;
-    void readingCardFailed(QString error) override;
 
 private:
     QSocketNotifier* m_notify;
