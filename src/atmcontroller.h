@@ -5,7 +5,7 @@
 
 #include <QtCore>
 
-#include "bankaccount.h"
+#include "BankAccount.h"
 #include "BankApiAccessManager.h"
 #include "CardReader.h"
 

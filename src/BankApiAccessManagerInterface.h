@@ -1,7 +1,7 @@
 #ifndef _BANK_API_ACCESS_MANAGER_INTERFACE_H
 #define _BANK_API_ACCESS_MANAGER_INTERFACE_H
 
-#include "bankaccount.h"
+#include "BankAccount.h"
 #include "CardReader.h"
 
 class BankApiAccessManagerInterface {

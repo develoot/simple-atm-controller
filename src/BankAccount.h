@@ -1,5 +1,5 @@
-#ifndef _BANKACCOUNT_H
-#define _BANKACCOUNT_H
+#ifndef _BANK_ACCOUNT_H
+#define _BANK_ACCOUNT_H
 
 #include <QString>
 
