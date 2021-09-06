@@ -18,11 +18,6 @@ public:
     int initialize();
 
 public slots:
-    /**
-     * Read a card from a card reader device.
-     *
-     * This slot is implemented to be always succeed as there's no actual card device.
-     */
     void read();
 
 signals:
