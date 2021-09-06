@@ -1,9 +1,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include "cardreader.h"
+#include "CardReader.h"
 
-CardReader::CardReader(QObject* parent, const QString& device)
+CardReader::CardReader(QObject* parent, QString device)
     : QObject{parent}
     , m_device{device}
 {
@@ -21,7 +21,6 @@ int CardReader::initialize()
         return -1;
     }
 
-    // I prefer Qt's Object Tree & Ownership model over smart pointers.
     m_notify = new QSocketNotifier(m_fd, QSocketNotifier::Read, this);
     connect(m_notify, &QSocketNotifier::activated, this, &CardReader::read);
 

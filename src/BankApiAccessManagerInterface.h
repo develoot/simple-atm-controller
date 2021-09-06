@@ -2,7 +2,7 @@
 #define _BANK_API_ACCESS_MANAGER_INTERFACE_H
 
 #include "bankaccount.h"
-#include "cardreader.h"
+#include "CardReader.h"
 
 class BankApiAccessManagerInterface {
 public slots:

@@ -7,7 +7,7 @@
 
 #include "bankaccount.h"
 #include "BankApiAccessManager.h"
-#include "cardreader.h"
+#include "CardReader.h"
 
 class AtmController : public QObject {
     Q_OBJECT

@@ -1,8 +1,8 @@
 #include <QSignalSpy>
 
-#include <cardreader.h>
+#include <CardReader.h>
 
-#include "testcardreader.h"
+#include "testCardReader.h"
 
 void TestCardReader::testReadSucceed()
 {
