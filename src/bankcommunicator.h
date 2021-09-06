@@ -38,7 +38,8 @@ signals:
     void depositFailed(QString error);
 
 private:
-    QNetworkReply* request(CardReader::CardInfo info, qint32 pinNumber, QString resourceUrl);
+    QNetworkReply* request(CardReader::CardInfo info, qint32 pinNumber, QString resourceUrl,
+                            QJsonObject jsonObject);
 
     QString m_baseUrl;
     QNetworkAccessManager m_networkManager;

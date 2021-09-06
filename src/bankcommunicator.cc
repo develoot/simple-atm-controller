@@ -12,7 +12,10 @@ BankCommunicator::BankCommunicator(QObject* const parent, const QString& baseUrl
 
 void BankCommunicator::authenticate(CardReader::CardInfo info, qint32 pinNumber)
 {
-    QNetworkReply *const reply = request(info, pinNumber, "/auth");
+    QJsonObject jsonObject;
+    jsonObject.insert("name", QJsonValue::fromVariant(info.name));
+    jsonObject.insert("pin", QJsonValue::fromVariant(pinNumber));
+    QNetworkReply *const reply = request(info, pinNumber, "/auth", jsonObject);
     connect(reply, &QIODevice::readyRead, this, [this, reply] {
         QJsonParseError error;
         auto replyJson = QJsonDocument::fromJson(reply->readAll(), &error);
@@ -40,7 +43,10 @@ void BankCommunicator::authenticate(CardReader::CardInfo info, qint32 pinNumber)
 
 void BankCommunicator::fetchAccountList(CardReader::CardInfo info, qint32 pinNumber)
 {
-    QNetworkReply *const reply = request(info, pinNumber, "/accounts");
+    QJsonObject jsonObject;
+    jsonObject.insert("name", QJsonValue::fromVariant(info.name));
+    jsonObject.insert("pin", QJsonValue::fromVariant(pinNumber));
+    QNetworkReply *const reply = request(info, pinNumber, "/accounts", jsonObject);
     connect(reply, &QIODevice::readyRead, this, [this, reply] {
         QJsonParseError error;
         auto replyJson = QJsonDocument::fromJson(reply->readAll(), &error);
@@ -80,16 +86,7 @@ void BankCommunicator::fetchAccountBalance(CardReader::CardInfo info, qint32 pin
     jsonObject.insert("account", QJsonValue::fromVariant(accountName));
     jsonObject.insert("name", QJsonValue::fromVariant(info.name));
     jsonObject.insert("pin", QJsonValue::fromVariant(pinNumber));
-
-    QJsonDocument jsonDocument{jsonObject};
-    auto dataSize = QByteArray::number(jsonDocument.toJson().size());
-
-    QUrl serviceUrl{m_baseUrl + "/balance"};
-    QNetworkRequest request{serviceUrl};
-    request.setRawHeader("Content-Type", "application/json");
-    request.setRawHeader("Content-Length", dataSize);
-
-    QNetworkReply *const reply = m_networkManager.post(request, jsonDocument.toJson());
+    QNetworkReply *const reply = request(info, pinNumber, "/balance", jsonObject);
     connect(reply, &QIODevice::readyRead, this, [this, reply] {
         QJsonParseError error;
         auto replyJson = QJsonDocument::fromJson(reply->readAll(), &error);
@@ -127,16 +124,7 @@ void BankCommunicator::deposit(CardReader::CardInfo info, qint32 pinNumber, QStr
     jsonObject.insert("amount", QJsonValue::fromVariant(amount));
     jsonObject.insert("name", QJsonValue::fromVariant(info.name));
     jsonObject.insert("pin", QJsonValue::fromVariant(pinNumber));
-
-    QJsonDocument jsonDocument{jsonObject};
-    auto dataSize = QByteArray::number(jsonDocument.toJson().size());
-
-    QUrl serviceUrl{m_baseUrl + "/deposit"};
-    QNetworkRequest request{serviceUrl};
-    request.setRawHeader("Content-Type", "application/json");
-    request.setRawHeader("Content-Length", dataSize);
-
-    QNetworkReply *const reply = m_networkManager.post(request, jsonDocument.toJson());
+    QNetworkReply *const reply = request(info, pinNumber, "/deposit", jsonObject);
     connect(reply, &QIODevice::readyRead, this, [this, reply] {
         QJsonParseError error;
         auto replyJson = QJsonDocument::fromJson(reply->readAll(), &error);
@@ -162,13 +150,9 @@ void BankCommunicator::deposit(CardReader::CardInfo info, qint32 pinNumber, QStr
     });
 }
 
-QNetworkReply* BankCommunicator::request(CardReader::CardInfo info, qint32 pinNumber,
-                                            QString resourceUrl)
+QNetworkReply* BankCommunicator::request(CardReader::CardInfo info, qint32 pinNumber, QString resourceUrl,
+                                            QJsonObject jsonObject)
 {
-    QJsonObject jsonObject;
-    jsonObject.insert("name", QJsonValue::fromVariant(info.name));
-    jsonObject.insert("pin", QJsonValue::fromVariant(pinNumber));
-
     QJsonDocument json{jsonObject};
     auto dataSize = QByteArray::number(json.toJson().size());
 
