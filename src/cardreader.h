@@ -28,7 +28,7 @@ public slots:
 signals:
     void readingCardStarted();
     void readingCardSucceed(CardInfo info);
-    void readingCardFailed();
+    void readingCardFailed(QString error);
 
 private:
     QSocketNotifier* m_notify;

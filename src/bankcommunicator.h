@@ -1,44 +1,47 @@
 #ifndef _BANKCOMMUNICATOR_H
 #define _BANKCOMMUNICATOR_H
 
-#include <QObject>
 #include <QtNetwork/QNetworkAccessManager>
 
+#include "bankaccount.h"
 #include "cardreader.h"
 
 class BankCommunicator : public QObject {
     Q_OBJECT
 
 public:
-    BankCommunicator(QObject *parent = nullptr, const QUrl& baseUrl = QUrl{"https://api.mybank.com"});
-    ~BankCommunicator();
+    BankCommunicator(QObject* const parent = nullptr,
+                    const QString& baseUrl = QString{"https://api.mybank.com"});
+    ~BankCommunicator() = default;
 
 public slots:
     void authenticate(CardReader::CardInfo info, qint32 pinNumber);
-    void fetchAccountList();
-    void fetchAccountBalance();
-    void fetchAccountDeposit();
+    void fetchAccountList(CardReader::CardInfo info, qint32 pinNumber);
+    void fetchAccountBalance(CardReader::CardInfo info, qint32 pinNumber, QString accountName);
+    void deposit(CardReader::CardInfo info, qint32 pinNumber, QString accountName, qint64 amount);
 
 signals:
     void authenticationStarted();
     void authenticationSucceed();
-    void authenticationFailed();
+    void authenticationFailed(QString error);
 
     void fetchingAccountListStarted();
-    void fetchingAccountListSucceed();
-    void fetchingAccountListFailed();
+    void fetchingAccountListSucceed(QList<BankAccount> accoutList);
+    void fetchingAccountListFailed(QString error);
 
     void fetchingAccountBalanceStarted();
-    void fetchingAccountBalanceSucceed();
-    void fetchingAccountBalanceFailed();
+    void fetchingAccountBalanceSucceed(qint64 accountBalance);
+    void fetchingAccountBalanceFailed(QString error);
 
-    void fetchingAccountDepositStarted();
-    void fetchingAccountDepositSucceed();
-    void fetchingAccountDepositFailed();
+    void depositStarted();
+    void depositSucceed();
+    void depositFailed(QString error);
 
 private:
+    QNetworkReply* request(CardReader::CardInfo info, qint32 pinNumber, QString resourceUrl);
+
+    QString m_baseUrl;
     QNetworkAccessManager m_networkManager;
-    QUrl m_baseUrl;
 };
 
 #endif

@@ -1,68 +1,73 @@
 #ifndef _ATMCONTROLLER_H
 #define _ATMCONTROLLER_H
 
-#include <QObject>
-#include <QVector>
+#include <memory>
 
-#include "cardreader.h"
+#include <QtCore>
+
 #include "bankaccount.h"
 #include "bankcommunicator.h"
+#include "cardreader.h"
 
 class AtmController : public QObject {
     Q_OBJECT
 
-    Q_PROPERTY(QVector<BankAccount> accountList READ accountList NOTIFY accountListChanged);
-    Q_PROPERTY(BankAccount selectedAccount READ selectedAccount NOTIFY selectedAccountChanged);
+    Q_PROPERTY(QList<BankAccount> accountList READ accountList NOTIFY accountListChanged);
+    Q_PROPERTY(qint64 selectedAccountIndex READ selectedAccountIndex
+                NOTIFY selectedAccountIndexChanged);
 
 public:
-    AtmController() = default;
+    AtmController(QObject* const parent = nullptr);
     ~AtmController() = default;
 
-    QVector<BankAccount> accountList() const { return m_accountList; };
-    BankAccount selectedAccount() const { return m_selectedAccount; };
+    QList<BankAccount> accountList() const { return m_accountList; };
+    qint64 selectedAccountIndex() const { return m_selectedAccountIndex; };
 
 public slots:
-    void readCard();
+    void readCard(CardReader::CardInfo info);
     void authenticate(qint32 pinNumber);
     void fetchAccountList();
     void selectAccount(qint32 index);
     void fetchAccountBalance();
-    void fetchAccountDeposit();
-    void withdrawOperation();
+    void deposit(qint64 amount);
+    void withdraw();
 
 signals:
     void readingCardStarted();
     void readingCardSucceed();
-    void readingCardFailed();
+    void readingCardFailed(QString error);
 
     void authenticationStarted();
     void authenticationSucceed();
-    void authenticationFailed();
+    void authenticationFailed(QString error);
 
     void fetchingAccountListStarted();
     void fetchingAccountListSucceed();
-    void fetchingAccountListFailed();
+    void fetchingAccountListFailed(QString error);
 
     void fetchingAccountBalanceStarted();
-    void fetchingAccountBalanceSucceed();
-    void fetchingAccountBalanceFailed();
+    void fetchingAccountBalanceSucceed(qint64 accountBalance);
+    void fetchingAccountBalanceFailed(QString error);
 
-    void fetchingAccountDepositStarted();
-    void fetchingAccountDepositSucceed();
-    void fetchingAccountDepositFailed();
+    void depositStarted();
+    void depositSucceed();
+    void depositFailed(QString error);
 
     void withdrawed();
 
     void accountListChanged();
-    void selectedAccountChanged();
+    void selectedAccountIndexChanged(qint32 index);
 
 private:
-    BankCommunicator bankCommDelegate;
-    CardReader cardReaderDelegate;
+    BankCommunicator m_bankCommDelegate;
+    CardReader m_cardReaderDelegate;
 
-    bool m_isAuthenticated = false;
-    QVector<BankAccount> m_accountList;
-    BankAccount m_selectedAccount;
+    bool m_isAuthenticated;
+    qint32 m_pinNumber;
+    qint64 m_selectedAccountIndex;
+
+    QList<BankAccount> m_accountList;
+    std::unique_ptr<CardReader::CardInfo> m_cardInfo;
 };
 
 #endif
