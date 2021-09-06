@@ -1,15 +1,15 @@
 set(atmcontroller_SRCS
-    main.cc
+    BankApiAccessManager.cc
     atmcontroller.cc
-    bankcommunicator.cc
     cardreader.cc
+    main.cc
 )
 
 set(atmcontroller_HDRS
+    BankApiAccessManager.h
     BankApiAccessManagerInterface.h
     atmcontroller.h
     bankaccount.h
-    bankcommunicator.h
     cardreader.h
 )
 

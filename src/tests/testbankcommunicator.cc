@@ -1,18 +1,18 @@
 #include <QSignalSpy>
 
-#include <bankcommunicator.h>
+#include <BankApiAccessManager.h>
 
-#include "testbankcommunicator.h"
+#include "testBankApiAccessManager.h"
 
-void TestBankCommunicator::testAuthenticateSucceed()
+void TestBankApiAccessManager::testAuthenticateSucceed()
 {
     QVERIFY(true);
 
     /*
-    BankCommunicator comm{this};
+    BankApiAccessManager comm{this};
 
-    QSignalSpy authenticationStartedSpy(&comm, &BankCommunicator::authenticationStarted);
-    QSignalSpy authenticationSucceedSpy(&comm, &BankCommunicator::authenticationSucceed);
+    QSignalSpy authenticationStartedSpy(&comm, &BankApiAccessManager::authenticationStarted);
+    QSignalSpy authenticationSucceedSpy(&comm, &BankApiAccessManager::authenticationSucceed);
 
     QMetaObject::invokeMethod(&comm, "authenticate", Qt::DirectConnection);
 
@@ -21,15 +21,15 @@ void TestBankCommunicator::testAuthenticateSucceed()
     */
 }
 
-void TestBankCommunicator::testAuthenticateFailed()
+void TestBankApiAccessManager::testAuthenticateFailed()
 {
     QVERIFY(true);
 
     /*
-    BankCommunicator comm{this};
+    BankApiAccessManager comm{this};
 
-    QSignalSpy authenticationStartedSpy(&comm, &BankCommunicator::authenticationStarted);
-    QSignalSpy authenticationFailedSpy(&comm, &BankCommunicator::authenticationFailed);
+    QSignalSpy authenticationStartedSpy(&comm, &BankApiAccessManager::authenticationStarted);
+    QSignalSpy authenticationFailedSpy(&comm, &BankApiAccessManager::authenticationFailed);
 
     QMetaObject::invokeMethod(&comm, "authenticate", Qt::DirectConnection);
 
@@ -38,15 +38,15 @@ void TestBankCommunicator::testAuthenticateFailed()
     */
 }
 
-void TestBankCommunicator::testFetchAccountListSucceed()
+void TestBankApiAccessManager::testFetchAccountListSucceed()
 {
     QVERIFY(true);
 
     /*
-    BankCommunicator comm{this};
+    BankApiAccessManager comm{this};
 
-    QSignalSpy fetchingAccountListStartedSpy(&comm, &BankCommunicator::fetchingAccountListStarted);
-    QSignalSpy fetchingAccountListSucceedSpy(&comm, &BankCommunicator::fetchingAccountListSucceed);
+    QSignalSpy fetchingAccountListStartedSpy(&comm, &BankApiAccessManager::fetchingAccountListStarted);
+    QSignalSpy fetchingAccountListSucceedSpy(&comm, &BankApiAccessManager::fetchingAccountListSucceed);
 
     QMetaObject::invokeMethod(&comm, "fetchAccountList", Qt::DirectConnection);
 
@@ -55,15 +55,15 @@ void TestBankCommunicator::testFetchAccountListSucceed()
     */
 }
 
-void TestBankCommunicator::testFetchAccountListFailed()
+void TestBankApiAccessManager::testFetchAccountListFailed()
 {
     QVERIFY(true);
 
     /*
-    BankCommunicator comm{this};
+    BankApiAccessManager comm{this};
 
-    QSignalSpy fetchingAccountListStartedSpy(&comm, &BankCommunicator::fetchingAccountListStarted);
-    QSignalSpy fetchingAccountListFailedSpy(&comm, &BankCommunicator::fetchingAccountListFailed);
+    QSignalSpy fetchingAccountListStartedSpy(&comm, &BankApiAccessManager::fetchingAccountListStarted);
+    QSignalSpy fetchingAccountListFailedSpy(&comm, &BankApiAccessManager::fetchingAccountListFailed);
 
     QMetaObject::invokeMethod(&comm, "fetchAccountList", Qt::DirectConnection);
 
@@ -72,15 +72,15 @@ void TestBankCommunicator::testFetchAccountListFailed()
     */
 }
 
-void TestBankCommunicator::testFetchAccountBalanceSucceed()
+void TestBankApiAccessManager::testFetchAccountBalanceSucceed()
 {
     QVERIFY(true);
 
     /*
-    BankCommunicator comm{this};
+    BankApiAccessManager comm{this};
 
-    QSignalSpy fetchingAccountBalanceStartedSpy(&comm, &BankCommunicator::fetchingAccountBalanceStarted);
-    QSignalSpy fetchingAccountBalanceSucceedSpy(&comm, &BankCommunicator::fetchingAccountBalanceSucceed);
+    QSignalSpy fetchingAccountBalanceStartedSpy(&comm, &BankApiAccessManager::fetchingAccountBalanceStarted);
+    QSignalSpy fetchingAccountBalanceSucceedSpy(&comm, &BankApiAccessManager::fetchingAccountBalanceSucceed);
 
     QMetaObject::invokeMethod(&comm, "fetchAccountBalance", Qt::DirectConnection);
 
@@ -89,15 +89,15 @@ void TestBankCommunicator::testFetchAccountBalanceSucceed()
     */
 }
 
-void TestBankCommunicator::testFetchAccountBalanceFailed()
+void TestBankApiAccessManager::testFetchAccountBalanceFailed()
 {
     QVERIFY(true);
 
     /*
-    BankCommunicator comm{this};
+    BankApiAccessManager comm{this};
 
-    QSignalSpy fetchingAccountBalanceStartedSpy(&comm, &BankCommunicator::fetchingAccountBalanceStarted);
-    QSignalSpy fetchingAccountBalanceSucceedSpy(&comm, &BankCommunicator::fetchingAccountBalanceSucceed);
+    QSignalSpy fetchingAccountBalanceStartedSpy(&comm, &BankApiAccessManager::fetchingAccountBalanceStarted);
+    QSignalSpy fetchingAccountBalanceSucceedSpy(&comm, &BankApiAccessManager::fetchingAccountBalanceSucceed);
 
     QMetaObject::invokeMethod(&comm, "fetchAccountBalance", Qt::DirectConnection);
 
@@ -106,15 +106,15 @@ void TestBankCommunicator::testFetchAccountBalanceFailed()
     */
 }
 
-void TestBankCommunicator::testFetchAccountDepositSucceed()
+void TestBankApiAccessManager::testFetchAccountDepositSucceed()
 {
     QVERIFY(true);
 
     /*
-    BankCommunicator comm{this};
+    BankApiAccessManager comm{this};
 
-    QSignalSpy fetchingAccountDepositStartedSpy(&comm, &BankCommunicator::fetchingAccountDepositStarted);
-    QSignalSpy fetchingAccountDepositSucceedSpy(&comm, &BankCommunicator::fetchingAccountDepositSucceed);
+    QSignalSpy fetchingAccountDepositStartedSpy(&comm, &BankApiAccessManager::fetchingAccountDepositStarted);
+    QSignalSpy fetchingAccountDepositSucceedSpy(&comm, &BankApiAccessManager::fetchingAccountDepositSucceed);
 
     QMetaObject::invokeMethod(&comm, "fetchAccountDeposit", Qt::DirectConnection);
 
@@ -123,15 +123,15 @@ void TestBankCommunicator::testFetchAccountDepositSucceed()
     */
 }
 
-void TestBankCommunicator::testFetchAccountDepositFailed()
+void TestBankApiAccessManager::testFetchAccountDepositFailed()
 {
     QVERIFY(true);
 
     /*
-    BankCommunicator comm{this};
+    BankApiAccessManager comm{this};
 
-    QSignalSpy fetchingAccountDepositStartedSpy(&comm, &BankCommunicator::fetchingAccountDepositStarted);
-    QSignalSpy fetchingAccountDepositFailedSpy(&comm, &BankCommunicator::fetchingAccountDepositFailed);
+    QSignalSpy fetchingAccountDepositStartedSpy(&comm, &BankApiAccessManager::fetchingAccountDepositStarted);
+    QSignalSpy fetchingAccountDepositFailedSpy(&comm, &BankApiAccessManager::fetchingAccountDepositFailed);
 
     QMetaObject::invokeMethod(&comm, "fetchAccountDeposit", Qt::DirectConnection);
 
@@ -140,4 +140,4 @@ void TestBankCommunicator::testFetchAccountDepositFailed()
     */
 }
 
-QTEST_MAIN(TestBankCommunicator)
+QTEST_MAIN(TestBankApiAccessManager)

@@ -6,7 +6,7 @@
 #include <QtCore>
 
 #include "bankaccount.h"
-#include "bankcommunicator.h"
+#include "BankApiAccessManager.h"
 #include "cardreader.h"
 
 class AtmController : public QObject {
@@ -61,7 +61,7 @@ signals:
     void selectedAccountIndexChanged(qint32 index);
 
 private:
-    BankCommunicator m_bankCommDelegate;
+    BankApiAccessManager m_bankCommDelegate;
     CardReader m_cardReaderDelegate;
 
     bool m_isAuthenticated;

@@ -1,11 +1,11 @@
 #include <QTest>
 
-class TestBankCommunicator : public QObject {
+class TestBankApiAccessManager : public QObject {
     Q_OBJECT
 
 private slots:
     /*
-     * We can't instantiate working `BankCommunicator` as there's no actual Bank API.
+     * We can't instantiate working `BankApiAccessManager` as there's no actual Bank API.
      *
      * So, these tests are implemented to be always passed.
      */

@@ -1,16 +1,13 @@
-#include <QtCore>
-#include <QtNetwork>
+#include "BankApiAccessManager.h"
 
-#include "bankcommunicator.h"
-
-BankCommunicator::BankCommunicator(QObject* const parent, const QString& baseUrl)
+BankApiAccessManager::BankApiAccessManager(QObject* const parent, const QString& baseUrl)
     : QObject{parent}
     , m_baseUrl{baseUrl}
     , m_networkManager{this}
 {
 }
 
-void BankCommunicator::authenticate(CardReader::CardInfo info, qint32 pinNumber)
+void BankApiAccessManager::authenticate(CardReader::CardInfo info, qint32 pinNumber)
 {
     QJsonObject jsonObject;
     jsonObject.insert("name", QJsonValue::fromVariant(info.name));
@@ -41,7 +38,7 @@ void BankCommunicator::authenticate(CardReader::CardInfo info, qint32 pinNumber)
     });
 }
 
-void BankCommunicator::fetchAccountList(CardReader::CardInfo info, qint32 pinNumber)
+void BankApiAccessManager::fetchAccountList(CardReader::CardInfo info, qint32 pinNumber)
 {
     QJsonObject jsonObject;
     jsonObject.insert("name", QJsonValue::fromVariant(info.name));
@@ -80,7 +77,7 @@ void BankCommunicator::fetchAccountList(CardReader::CardInfo info, qint32 pinNum
     });
 }
 
-void BankCommunicator::fetchAccountBalance(CardReader::CardInfo info, qint32 pinNumber, QString accountName)
+void BankApiAccessManager::fetchAccountBalance(CardReader::CardInfo info, qint32 pinNumber, QString accountName)
 {
     QJsonObject jsonObject;
     jsonObject.insert("account", QJsonValue::fromVariant(accountName));
@@ -116,7 +113,7 @@ void BankCommunicator::fetchAccountBalance(CardReader::CardInfo info, qint32 pin
     });
 }
 
-void BankCommunicator::deposit(CardReader::CardInfo info, qint32 pinNumber, QString accountName,
+void BankApiAccessManager::deposit(CardReader::CardInfo info, qint32 pinNumber, QString accountName,
                                 qint64 amount)
 {
     QJsonObject jsonObject;
@@ -150,7 +147,7 @@ void BankCommunicator::deposit(CardReader::CardInfo info, qint32 pinNumber, QStr
     });
 }
 
-QNetworkReply* BankCommunicator::request(CardReader::CardInfo info, qint32 pinNumber, QString resourceUrl,
+QNetworkReply* BankApiAccessManager::request(CardReader::CardInfo info, qint32 pinNumber, QString resourceUrl,
                                             QJsonObject jsonObject)
 {
     QJsonDocument json{jsonObject};

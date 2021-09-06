@@ -7,56 +7,56 @@ AtmController::AtmController(QObject* const parent)
     , m_isAuthenticated{false}
     , m_cardInfo{nullptr}
 {
-    connect(&m_bankCommDelegate, &BankCommunicator::authenticationStarted,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::authenticationStarted,
             this, [this]() {
         emit authenticationStarted();
     });
-    connect(&m_bankCommDelegate, &BankCommunicator::authenticationSucceed,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::authenticationSucceed,
             this, [this]() {
         m_isAuthenticated = true;
         emit authenticationSucceed();
     });
-    connect(&m_bankCommDelegate, &BankCommunicator::authenticationFailed,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::authenticationFailed,
             this, [this](QString error) {
         emit authenticationFailed(error);
     });
 
-    connect(&m_bankCommDelegate, &BankCommunicator::fetchingAccountListStarted,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::fetchingAccountListStarted,
             this, [this]() {
         emit fetchingAccountListStarted();
     });
-    connect(&m_bankCommDelegate, &BankCommunicator::fetchingAccountListSucceed,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::fetchingAccountListSucceed,
             this, [this](QList<BankAccount> accountList) {
         m_accountList = accountList;
         emit accountListChanged();
     });
-    connect(&m_bankCommDelegate, &BankCommunicator::fetchingAccountListFailed,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::fetchingAccountListFailed,
             this, [this](QString error) {
         emit fetchingAccountListFailed(error);
     });
 
-    connect(&m_bankCommDelegate, &BankCommunicator::fetchingAccountBalanceStarted,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::fetchingAccountBalanceStarted,
             this, [this]() {
         emit fetchingAccountBalanceStarted();
     });
-    connect(&m_bankCommDelegate, &BankCommunicator::fetchingAccountBalanceSucceed,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::fetchingAccountBalanceSucceed,
             this, [this](qint64 accountBalance) {
         emit fetchingAccountBalanceSucceed(accountBalance);
     });
-    connect(&m_bankCommDelegate, &BankCommunicator::fetchingAccountBalanceFailed,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::fetchingAccountBalanceFailed,
             this, [this](QString error) {
         emit fetchingAccountBalanceFailed(error);
     });
 
-    connect(&m_bankCommDelegate, &BankCommunicator::depositStarted,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::depositStarted,
             this, [this]() {
         emit depositStarted();
     });
-    connect(&m_bankCommDelegate, &BankCommunicator::depositSucceed,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::depositSucceed,
             this, [this]() {
         emit depositSucceed();
     });
-    connect(&m_bankCommDelegate, &BankCommunicator::depositFailed,
+    connect(&m_bankCommDelegate, &BankApiAccessManager::depositFailed,
             this, [this](QString error) {
         emit depositFailed(error);
     });
