@@ -27,7 +27,7 @@ public slots:
 
 signals:
     void readingCardStarted();
-    void readingCardSucceed(CardInfo info);
+    void readingCardSucceed(CardReader::CardInfo info);
     void readingCardFailed(QString error);
 
 private:
