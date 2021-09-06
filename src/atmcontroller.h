@@ -20,6 +20,8 @@ public:
     AtmController(QObject* const parent = nullptr);
     ~AtmController() = default;
 
+    int initialize();
+
     QList<BankAccount> accountList() const { return m_accountList; };
     qint64 selectedAccountIndex() const { return m_selectedAccountIndex; };
 

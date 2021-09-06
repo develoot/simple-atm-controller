@@ -77,6 +77,16 @@ AtmController::AtmController(QObject* const parent)
     });
 }
 
+int AtmController::initialize()
+{
+    int result = m_cardReaderDelegate.initialize();
+    if (result != 0) {
+        return -1;
+    }
+
+    return 0;
+}
+
 void AtmController::readCard(CardReader::CardInfo info)
 {
     m_cardInfo = std::make_unique<CardReader::CardInfo>(info);
