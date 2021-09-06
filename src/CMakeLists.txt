@@ -6,6 +6,7 @@ set(atmcontroller_SRCS
 )
 
 set(atmcontroller_HDRS
+    BankApiAccessManagerInterface.h
     atmcontroller.h
     bankaccount.h
     bankcommunicator.h
