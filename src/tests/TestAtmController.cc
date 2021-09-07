@@ -61,47 +61,46 @@ void DummyBankApiAccessManager::deposit(CardReaderBase::CardInfo info, qint32 pi
 
 void TestAtmController::initTestCase()
 {
-    m_controller = std::make_unique<AtmController>(this, new DummyCardReader{},
-                                                    new DummyBankApiAccessManager{});
+    m_controller = new AtmController{this, new DummyCardReader{}, new DummyBankApiAccessManager{}};
 }
 
 void TestAtmController::init()
 {
-    QSignalSpy withdrawedSpy{m_controller.get(), &AtmController::withdrawed};
-    QMetaObject::invokeMethod(m_controller.get(), "withdraw", Qt::DirectConnection);
+    QSignalSpy withdrawedSpy{m_controller, &AtmController::withdrawed};
+    QMetaObject::invokeMethod(m_controller, "withdraw", Qt::DirectConnection);
     QCOMPARE(withdrawedSpy.count(), 1);
 
     m_controller->initialize();
 
-    QSignalSpy authenticationStartedSpy{m_controller.get(), &AtmController::authenticationStarted};
-    QSignalSpy authenticationSucceedSpy{m_controller.get(), &AtmController::authenticationSucceed};
-    QMetaObject::invokeMethod(m_controller.get(), "authenticate", Qt::DirectConnection, Q_ARG(qint32, 77));
+    QSignalSpy authenticationStartedSpy{m_controller, &AtmController::authenticationStarted};
+    QSignalSpy authenticationSucceedSpy{m_controller, &AtmController::authenticationSucceed};
+    QMetaObject::invokeMethod(m_controller, "authenticate", Qt::DirectConnection, Q_ARG(qint32, 77));
     QCOMPARE(authenticationStartedSpy.count(), 1);
     QCOMPARE(authenticationSucceedSpy.count(), 1);
 
-    QSignalSpy fetchingAccountListStartedSpy{m_controller.get(), &AtmController::fetchingAccountListStarted};
-    QSignalSpy accountListChangedSpy{m_controller.get(), &AtmController::accountListChanged};
-    QMetaObject::invokeMethod(m_controller.get(), "fetchAccountList", Qt::DirectConnection);
+    QSignalSpy fetchingAccountListStartedSpy{m_controller, &AtmController::fetchingAccountListStarted};
+    QSignalSpy accountListChangedSpy{m_controller, &AtmController::accountListChanged};
+    QMetaObject::invokeMethod(m_controller, "fetchAccountList", Qt::DirectConnection);
     QCOMPARE(fetchingAccountListStartedSpy.count(), 1);
     QCOMPARE(accountListChangedSpy.count(), 1);
 
-    QSignalSpy selectedAccountIndexChangedSpy{m_controller.get(), &AtmController::selectedAccountIndexChanged};
-    QMetaObject::invokeMethod(m_controller.get(), "selectAccount", Qt::DirectConnection, Q_ARG(qint32, 2));
+    QSignalSpy selectedAccountIndexChangedSpy{m_controller, &AtmController::selectedAccountIndexChanged};
+    QMetaObject::invokeMethod(m_controller, "selectAccount", Qt::DirectConnection, Q_ARG(qint32, 2));
     QCOMPARE(selectedAccountIndexChangedSpy.count(), 1);
     QCOMPARE(m_controller->selectedAccountIndex(), 2);
 }
 
 void TestAtmController::testFetchAccountBalance()
 {
-    QSignalSpy fetchingAccountBalanceSucceedSpy{m_controller.get(), &AtmController::fetchingAccountBalanceSucceed};
-    QMetaObject::invokeMethod(m_controller.get(), "fetchAccountBalance", Qt::DirectConnection);
+    QSignalSpy fetchingAccountBalanceSucceedSpy{m_controller, &AtmController::fetchingAccountBalanceSucceed};
+    QMetaObject::invokeMethod(m_controller, "fetchAccountBalance", Qt::DirectConnection);
     QCOMPARE(fetchingAccountBalanceSucceedSpy.count(), 1);
 }
 
 void TestAtmController::testDeposit()
 {
-    QSignalSpy depositSucceedSpy{m_controller.get(), &AtmController::depositSucceed};
-    QMetaObject::invokeMethod(m_controller.get(), "deposit", Qt::DirectConnection, Q_ARG(qint64, 9900));
+    QSignalSpy depositSucceedSpy{m_controller, &AtmController::depositSucceed};
+    QMetaObject::invokeMethod(m_controller, "deposit", Qt::DirectConnection, Q_ARG(qint64, 9900));
     QCOMPARE(depositSucceedSpy.count(), 1);
 }
 

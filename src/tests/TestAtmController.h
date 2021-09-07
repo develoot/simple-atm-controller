@@ -1,5 +1,3 @@
-#include <memory>
-
 #include <QtTest>
 
 #include <AtmController.h>
@@ -45,6 +43,6 @@ private slots:
     void testDeposit();
 
 private:
-    std::unique_ptr<AtmController> m_controller{nullptr};
+    AtmController* m_controller = nullptr;
 };
 

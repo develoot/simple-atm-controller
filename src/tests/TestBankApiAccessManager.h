@@ -1,5 +1,3 @@
-#include <memory>
-
 #include <QtTest>
 
 #include <BankApiAccessManager.h>
@@ -23,6 +21,6 @@ private slots:
     void testDepositFail();
 
 private:
-    std::unique_ptr<BankApiAccessManager> m_manager{nullptr};
+    BankApiAccessManager* m_manager = nullptr;
 };
 
