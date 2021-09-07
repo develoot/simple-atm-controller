@@ -1,18 +1,19 @@
-#include <BankApiAccessManager.h>
-
 #include "TestBankApiAccessManager.h"
+
+void TestBankApiAccessManager::initTestCase()
+{
+    m_manager = std::make_unique<BankApiAccessManager>(this, "https://test.api.mybank.com");
+}
 
 void TestBankApiAccessManager::testAuthenticateSuccess()
 {
-    BankApiAccessManager manager{this, "https://test.api.mybank.com"};
-
-    QSignalSpy authenticationStartedSpy(&manager, &BankApiAccessManager::authenticationStarted);
-    QSignalSpy authenticationSucceedSpy(&manager, &BankApiAccessManager::authenticationSucceed);
+    QSignalSpy authenticationStartedSpy(m_manager.get(), &BankApiAccessManager::authenticationStarted);
+    QSignalSpy authenticationSucceedSpy(m_manager.get(), &BankApiAccessManager::authenticationSucceed);
 
     CardReader::CardInfo info = { .name = "dummy" };
     qint32 pinNumber = 0x0000;
 
-    QMetaObject::invokeMethod(&manager, "authenticate", Qt::DirectConnection,
+    QMetaObject::invokeMethod(m_manager.get(), "authenticate", Qt::DirectConnection,
                                 Q_ARG(CardReader::CardInfo, info),
                                 Q_ARG(qint32, pinNumber));
 
@@ -22,15 +23,13 @@ void TestBankApiAccessManager::testAuthenticateSuccess()
 
 void TestBankApiAccessManager::testAuthenticateFail()
 {
-    BankApiAccessManager manager{this, "https://test.api.mybank.com"};
-
-    QSignalSpy authenticationStartedSpy(&manager, &BankApiAccessManager::authenticationStarted);
-    QSignalSpy authenticationFailedSpy(&manager, &BankApiAccessManager::authenticationFailed);
+    QSignalSpy authenticationStartedSpy(m_manager.get(), &BankApiAccessManager::authenticationStarted);
+    QSignalSpy authenticationFailedSpy(m_manager.get(), &BankApiAccessManager::authenticationFailed);
 
     CardReader::CardInfo info = { .name = "dummy" };
     qint32 pinNumber = 0x6161;
 
-    QMetaObject::invokeMethod(&manager, "authenticate", Qt::DirectConnection,
+    QMetaObject::invokeMethod(m_manager.get(), "authenticate", Qt::DirectConnection,
                                 Q_ARG(CardReader::CardInfo, info),
                                 Q_ARG(qint32, pinNumber));
 
@@ -40,15 +39,13 @@ void TestBankApiAccessManager::testAuthenticateFail()
 
 void TestBankApiAccessManager::testFetchAccountListSuccess()
 {
-    BankApiAccessManager manager{this, "https://test.api.mybank.com"};
-
-    QSignalSpy fetchingAccountListStartedSpy(&manager, &BankApiAccessManager::fetchingAccountListStarted);
-    QSignalSpy fetchingAccountListSucceedSpy(&manager, &BankApiAccessManager::fetchingAccountListSucceed);
+    QSignalSpy fetchingAccountListStartedSpy(m_manager.get(), &BankApiAccessManager::fetchingAccountListStarted);
+    QSignalSpy fetchingAccountListSucceedSpy(m_manager.get(), &BankApiAccessManager::fetchingAccountListSucceed);
 
     CardReader::CardInfo info = { .name = "dummy" };
     qint32 pinNumber = 0x0000;
 
-    QMetaObject::invokeMethod(&manager, "fetchAccountList", Qt::DirectConnection,
+    QMetaObject::invokeMethod(m_manager.get(), "fetchAccountList", Qt::DirectConnection,
                                 Q_ARG(CardReader::CardInfo, info),
                                 Q_ARG(qint32, pinNumber));
 
@@ -58,15 +55,13 @@ void TestBankApiAccessManager::testFetchAccountListSuccess()
 
 void TestBankApiAccessManager::testFetchAccountListFail()
 {
-    BankApiAccessManager manager{this, "https://test.api.mybank.com"};
-
-    QSignalSpy fetchingAccountListStartedSpy(&manager, &BankApiAccessManager::fetchingAccountListStarted);
-    QSignalSpy fetchingAccountListFailedSpy(&manager, &BankApiAccessManager::fetchingAccountListFailed);
+    QSignalSpy fetchingAccountListStartedSpy(m_manager.get(), &BankApiAccessManager::fetchingAccountListStarted);
+    QSignalSpy fetchingAccountListFailedSpy(m_manager.get(), &BankApiAccessManager::fetchingAccountListFailed);
 
     CardReader::CardInfo info = { .name = "dummy" };
     qint32 pinNumber = 0x6161;
 
-    QMetaObject::invokeMethod(&manager, "fetchAccountList", Qt::DirectConnection,
+    QMetaObject::invokeMethod(m_manager.get(), "fetchAccountList", Qt::DirectConnection,
                                 Q_ARG(CardReader::CardInfo, info),
                                 Q_ARG(qint32, pinNumber));
 
@@ -76,15 +71,13 @@ void TestBankApiAccessManager::testFetchAccountListFail()
 
 void TestBankApiAccessManager::testFetchAccountBalanceSuccess()
 {
-    BankApiAccessManager manager{this, "https://test.api.mybank.com"};
-
-    QSignalSpy fetchingAccountBalanceStartedSpy(&manager, &BankApiAccessManager::fetchingAccountBalanceStarted);
-    QSignalSpy fetchingAccountBalanceSucceedSpy(&manager, &BankApiAccessManager::fetchingAccountBalanceSucceed);
+    QSignalSpy fetchingAccountBalanceStartedSpy(m_manager.get(), &BankApiAccessManager::fetchingAccountBalanceStarted);
+    QSignalSpy fetchingAccountBalanceSucceedSpy(m_manager.get(), &BankApiAccessManager::fetchingAccountBalanceSucceed);
 
     CardReader::CardInfo info = { .name = "dummy" };
     qint32 pinNumber = 0x0000;
 
-    QMetaObject::invokeMethod(&manager, "fetchAccountBalance", Qt::DirectConnection,
+    QMetaObject::invokeMethod(m_manager.get(), "fetchAccountBalance", Qt::DirectConnection,
                                 Q_ARG(CardReader::CardInfo, info),
                                 Q_ARG(qint32, pinNumber),
                                 Q_ARG(QString, "Test"));
@@ -95,15 +88,13 @@ void TestBankApiAccessManager::testFetchAccountBalanceSuccess()
 
 void TestBankApiAccessManager::testFetchAccountBalanceFail()
 {
-    BankApiAccessManager manager{this, "https://test.api.mybank.com"};
-
-    QSignalSpy fetchingAccountListStartedSpy(&manager, &BankApiAccessManager::fetchingAccountListStarted);
-    QSignalSpy fetchingAccountListFailedSpy(&manager, &BankApiAccessManager::fetchingAccountListFailed);
+    QSignalSpy fetchingAccountListStartedSpy(m_manager.get(), &BankApiAccessManager::fetchingAccountListStarted);
+    QSignalSpy fetchingAccountListFailedSpy(m_manager.get(), &BankApiAccessManager::fetchingAccountListFailed);
 
     CardReader::CardInfo info = { .name = "dummy" };
     qint32 pinNumber = 0x6161;
 
-    QMetaObject::invokeMethod(&manager, "fetchAccountBalance", Qt::DirectConnection,
+    QMetaObject::invokeMethod(m_manager.get(), "fetchAccountBalance", Qt::DirectConnection,
                                 Q_ARG(CardReader::CardInfo, info),
                                 Q_ARG(qint32, pinNumber),
                                 Q_ARG(QString, "Test"));
@@ -114,15 +105,13 @@ void TestBankApiAccessManager::testFetchAccountBalanceFail()
 
 void TestBankApiAccessManager::testDepositSuccess()
 {
-    BankApiAccessManager manager{this, "https://test.api.mybank.com"};
-
-    QSignalSpy depositStartedSpy(&manager, &BankApiAccessManager::depositStarted);
-    QSignalSpy depositSucceedSpy(&manager, &BankApiAccessManager::depositSucceed);
+    QSignalSpy depositStartedSpy(m_manager.get(), &BankApiAccessManager::depositStarted);
+    QSignalSpy depositSucceedSpy(m_manager.get(), &BankApiAccessManager::depositSucceed);
 
     CardReader::CardInfo info = { .name = "dummy" };
     qint32 pinNumber = 0x0000;
 
-    QMetaObject::invokeMethod(&manager, "deposit", Qt::DirectConnection,
+    QMetaObject::invokeMethod(m_manager.get(), "deposit", Qt::DirectConnection,
                                 Q_ARG(CardReader::CardInfo, info),
                                 Q_ARG(qint32, pinNumber),
                                 Q_ARG(QString, "Test"),
@@ -134,15 +123,13 @@ void TestBankApiAccessManager::testDepositSuccess()
 
 void TestBankApiAccessManager::testDepositFail()
 {
-    BankApiAccessManager manager{this, "https://test.api.mybank.com"};
-
-    QSignalSpy depositStartedSpy(&manager, &BankApiAccessManager::depositStarted);
-    QSignalSpy depositFailedSpy(&manager, &BankApiAccessManager::depositFailed);
+    QSignalSpy depositStartedSpy(m_manager.get(), &BankApiAccessManager::depositStarted);
+    QSignalSpy depositFailedSpy(m_manager.get(), &BankApiAccessManager::depositFailed);
 
     CardReader::CardInfo info = { .name = "dummy" };
     qint32 pinNumber = 0x6161;
 
-    QMetaObject::invokeMethod(&manager, "deposit", Qt::DirectConnection,
+    QMetaObject::invokeMethod(m_manager.get(), "deposit", Qt::DirectConnection,
                                 Q_ARG(CardReader::CardInfo, info),
                                 Q_ARG(qint32, pinNumber),
                                 Q_ARG(QString, "Test"),

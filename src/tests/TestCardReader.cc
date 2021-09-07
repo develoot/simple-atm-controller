@@ -2,12 +2,6 @@
 
 #include "TestCardReader.h"
 
-void TestCardReader::testInitialize()
-{
-    CardReader reader{this};
-    QCOMPARE(reader.initialize(), 0);
-}
-
 void TestCardReader::testReadSucceed()
 {
     CardReader reader{this, "/path/to/test/dev"};
