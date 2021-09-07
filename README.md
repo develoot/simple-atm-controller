@@ -19,7 +19,7 @@ with CMake 3.16 and Qt 5.12.
 In the project root directory,
 
 ```
-$ cmake -B <output_directory> . && cmake --build build -j $(nproc)
+$ cmake -B <output_directory> . && cmake --build <output_directory> -j $(nproc)
 ```
 
 Substitute `<output_directory>` with wherever you want.
