@@ -25,12 +25,12 @@ public:
     ~DummyBankApiAccessManager() = default;
 
 public slots:
-    void authenticate(CardReaderBase::CardInfo info, qint32 pinNumber) override;
-    void fetchAccountList(CardReaderBase::CardInfo info, qint32 pinNumber) override;
+    void authenticate(CardReaderBase::CardInfo info, quint32 pinNumber) override;
+    void fetchAccountList(CardReaderBase::CardInfo info, quint32 pinNumber) override;
     void fetchAccountBalance(CardReaderBase::CardInfo info,
-                            qint32 pinNumber, QString accountName) override;
-    void deposit(CardReaderBase::CardInfo info, qint32 pinNumber,
-                            QString accountName, qint64 amount) override;
+                            quint32 pinNumber, QString accountName) override;
+    void deposit(CardReaderBase::CardInfo info, quint32 pinNumber,
+                            QString accountName, quint64 amount) override;
 };
 
 class TestAtmController : public QObject {

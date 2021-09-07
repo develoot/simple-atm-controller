@@ -13,7 +13,7 @@ class AtmController : public QObject {
     Q_OBJECT
 
     Q_PROPERTY(QList<BankAccount> accountList READ accountList NOTIFY accountListChanged);
-    Q_PROPERTY(qint64 selectedAccountIndex READ selectedAccountIndex
+    Q_PROPERTY(quint64 selectedAccountIndex READ selectedAccountIndex
                 NOTIFY selectedAccountIndexChanged);
 
 public:
@@ -25,15 +25,15 @@ public:
     int initialize();
 
     QList<BankAccount> accountList() const { return m_accountList; };
-    qint64 selectedAccountIndex() const { return m_selectedAccountIndex; };
+    quint64 selectedAccountIndex() const { return m_selectedAccountIndex; };
 
 public slots:
     void readCard(CardReader::CardInfo info);
-    void authenticate(qint32 pinNumber);
+    void authenticate(quint32 pinNumber);
     void fetchAccountList();
-    void selectAccount(qint32 index);
+    void selectAccount(quint32 index);
     void fetchAccountBalance();
-    void deposit(qint64 amount);
+    void deposit(quint64 amount);
     void withdraw();
 
 signals:
@@ -50,7 +50,7 @@ signals:
     void fetchingAccountListFailed(QString error);
 
     void fetchingAccountBalanceStarted();
-    void fetchingAccountBalanceSucceed(qint64 accountBalance);
+    void fetchingAccountBalanceSucceed(quint64 accountBalance);
     void fetchingAccountBalanceFailed(QString error);
 
     void depositStarted();
@@ -60,15 +60,15 @@ signals:
     void withdrawed();
 
     void accountListChanged();
-    void selectedAccountIndexChanged(qint32 index);
+    void selectedAccountIndexChanged(quint32 index);
 
 private:
     std::unique_ptr<BankApiAccessManagerBase> m_bankApiAccessManagerDelegate = nullptr;
     std::unique_ptr<CardReaderBase> m_cardReaderDelegate = nullptr;
 
     bool m_isAuthenticated = false;
-    qint32 m_pinNumber = -1;
-    qint64 m_selectedAccountIndex = -1;
+    quint32 m_pinNumber = 0;
+    quint64 m_selectedAccountIndex = 0;
 
     QList<BankAccount> m_accountList{};
     std::unique_ptr<CardReader::CardInfo> m_cardInfo{nullptr};

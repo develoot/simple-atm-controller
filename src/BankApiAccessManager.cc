@@ -7,7 +7,7 @@ BankApiAccessManager::BankApiAccessManager(QObject* const parent, const QString&
 {
 }
 
-void BankApiAccessManager::authenticate(CardReader::CardInfo info, qint32 pinNumber)
+void BankApiAccessManager::authenticate(CardReader::CardInfo info, quint32 pinNumber)
 {
     emit authenticationStarted();
 
@@ -47,7 +47,7 @@ void BankApiAccessManager::authenticate(CardReader::CardInfo info, qint32 pinNum
     });
 }
 
-void BankApiAccessManager::fetchAccountList(CardReader::CardInfo info, qint32 pinNumber)
+void BankApiAccessManager::fetchAccountList(CardReader::CardInfo info, quint32 pinNumber)
 {
     emit fetchingAccountListStarted();
 
@@ -100,7 +100,7 @@ void BankApiAccessManager::fetchAccountList(CardReader::CardInfo info, qint32 pi
 
 }
 
-void BankApiAccessManager::fetchAccountBalance(CardReader::CardInfo info, qint32 pinNumber, QString accountName)
+void BankApiAccessManager::fetchAccountBalance(CardReader::CardInfo info, quint32 pinNumber, QString accountName)
 {
     emit fetchingAccountBalanceStarted();
 
@@ -147,8 +147,8 @@ void BankApiAccessManager::fetchAccountBalance(CardReader::CardInfo info, qint32
     });
 }
 
-void BankApiAccessManager::deposit(CardReader::CardInfo info, qint32 pinNumber, QString accountName,
-                                qint64 amount)
+void BankApiAccessManager::deposit(CardReader::CardInfo info, quint32 pinNumber, QString accountName,
+                                quint64 amount)
 {
     emit depositStarted();
 
@@ -191,7 +191,7 @@ void BankApiAccessManager::deposit(CardReader::CardInfo info, qint32 pinNumber, 
     });
 }
 
-QNetworkReply* BankApiAccessManager::request(CardReader::CardInfo info, qint32 pinNumber, QString resourceUrl,
+QNetworkReply* BankApiAccessManager::request(CardReader::CardInfo info, quint32 pinNumber, QString resourceUrl,
                                             QJsonObject jsonObject)
 {
     QJsonDocument json{jsonObject};

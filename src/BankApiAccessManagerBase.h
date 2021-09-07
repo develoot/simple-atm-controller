@@ -15,12 +15,12 @@ public:
     ~BankApiAccessManagerBase() = default;
 
 public slots:
-    virtual void authenticate(CardReader::CardInfo info, qint32 pinNumber) = 0;
-    virtual void fetchAccountList(CardReader::CardInfo info, qint32 pinNumber) = 0;
+    virtual void authenticate(CardReader::CardInfo info, quint32 pinNumber) = 0;
+    virtual void fetchAccountList(CardReader::CardInfo info, quint32 pinNumber) = 0;
     virtual void fetchAccountBalance(CardReader::CardInfo info,
-                                        qint32 pinNumber, QString accountName) = 0;
-    virtual void deposit(CardReader::CardInfo info, qint32 pinNumber,
-                                        QString accountName, qint64 amount) = 0;
+                                        quint32 pinNumber, QString accountName) = 0;
+    virtual void deposit(CardReader::CardInfo info, quint32 pinNumber,
+                                        QString accountName, quint64 amount) = 0;
 
 signals:
     void authenticationStarted();
@@ -32,7 +32,7 @@ signals:
     void fetchingAccountListFailed(QString error);
 
     void fetchingAccountBalanceStarted();
-    void fetchingAccountBalanceSucceed(qint64 accountBalance);
+    void fetchingAccountBalanceSucceed(quint64 accountBalance);
     void fetchingAccountBalanceFailed(QString error);
 
     void depositStarted();

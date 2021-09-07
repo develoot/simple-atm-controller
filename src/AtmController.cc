@@ -73,7 +73,7 @@ void AtmController::readCard(CardReaderBase::CardInfo info)
     m_cardInfo = std::make_unique<CardReaderBase::CardInfo>(info);
 }
 
-void AtmController::authenticate(qint32 pinNumber)
+void AtmController::authenticate(quint32 pinNumber)
 {
     if (m_cardInfo == nullptr) {
         return;
@@ -81,7 +81,7 @@ void AtmController::authenticate(qint32 pinNumber)
 
     QMetaObject::invokeMethod(m_bankApiAccessManagerDelegate.get(), "authenticate", Qt::DirectConnection,
                                 Q_ARG(CardReaderBase::CardInfo, *m_cardInfo),
-                                Q_ARG(qint32, m_pinNumber));
+                                Q_ARG(quint32, m_pinNumber));
 }
 
 void AtmController::fetchAccountList()
@@ -92,10 +92,10 @@ void AtmController::fetchAccountList()
 
     QMetaObject::invokeMethod(m_bankApiAccessManagerDelegate.get(), "fetchAccountList", Qt::DirectConnection,
                                 Q_ARG(CardReaderBase::CardInfo, *m_cardInfo),
-                                Q_ARG(qint32, m_pinNumber));
+                                Q_ARG(quint32, m_pinNumber));
 }
 
-void AtmController::selectAccount(qint32 index)
+void AtmController::selectAccount(quint32 index)
 {
     if (index >= m_accountList.size()) {
         return;
@@ -113,11 +113,11 @@ void AtmController::fetchAccountBalance()
 
     QMetaObject::invokeMethod(m_bankApiAccessManagerDelegate.get(), "fetchAccountBalance", Qt::DirectConnection,
                                 Q_ARG(CardReaderBase::CardInfo, *m_cardInfo),
-                                Q_ARG(qint32, m_pinNumber),
-                                Q_ARG(QString, m_accountList.at(m_selectedAccountIndex).name));
+                                Q_ARG(quint32, m_pinNumber),
+                                Q_ARG(QString, m_accountList[m_selectedAccountIndex].name));
 }
 
-void AtmController::deposit(qint64 amount)
+void AtmController::deposit(quint64 amount)
 {
     if (m_cardInfo == nullptr || !m_isAuthenticated) {
         return;
@@ -125,9 +125,9 @@ void AtmController::deposit(qint64 amount)
 
     QMetaObject::invokeMethod(m_bankApiAccessManagerDelegate.get(), "deposit", Qt::DirectConnection,
                                 Q_ARG(CardReaderBase::CardInfo, *m_cardInfo),
-                                Q_ARG(qint32, m_pinNumber),
-                                Q_ARG(QString, m_accountList.at(m_selectedAccountIndex).name),
-                                Q_ARG(qint64, amount));
+                                Q_ARG(quint32, m_pinNumber),
+                                Q_ARG(QString, m_accountList[m_selectedAccountIndex].name),
+                                Q_ARG(quint64, amount));
 }
 
 void AtmController::withdraw()
