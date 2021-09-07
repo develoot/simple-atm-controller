@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16.0)
-project(atmcontroller VERSION 1.0.0 LANGUAGES CXX)
+project(AtmController VERSION 1.0.0 LANGUAGES CXX)
 
 enable_testing()
 
