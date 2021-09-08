@@ -18,8 +18,8 @@ class AtmController : public QObject {
 
 public:
     AtmController(QObject* const parent = nullptr,
-                    CardReaderBase* cardReader = nullptr,
-                    BankApiAccessManagerBase* bankApiAccessManager = nullptr);
+                    CardReaderBase* cardReader = new CardReader{},
+                    BankApiAccessManagerBase* bankApiAccessManager =new BankApiAccessManager{});
     ~AtmController() = default;
 
     int initialize();

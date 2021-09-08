@@ -6,14 +6,6 @@ AtmController::AtmController(QObject* const parent, CardReaderBase* cardReader,
     , m_cardReaderDelegate{cardReader}
     , m_bankApiAccessManagerDelegate{bankApiAccessManager}
 {
-    if (cardReader == nullptr) {
-        m_cardReaderDelegate = std::make_unique<CardReader>();
-    }
-
-    if (bankApiAccessManager == nullptr) {
-        m_bankApiAccessManagerDelegate = std::make_unique<BankApiAccessManager>();
-    }
-
     connect(m_bankApiAccessManagerDelegate.get(), &BankApiAccessManagerBase::authenticationStarted,
             this, &AtmController::authenticationStarted);
     connect(m_bankApiAccessManagerDelegate.get(), &BankApiAccessManagerBase::authenticationSucceed,
